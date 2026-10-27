@@ -1,0 +1,43 @@
+
+# Entrada de dados
+potencia = float(input("Informe a potência do chuveiro (W): "))
+tensao = float(input("Informe a tensão da instalação (127 ou 220 V): "))
+
+# Verifica se os valores são válidos
+if potencia <= 0 or tensao <= 0:
+    print("Erro: informe valores maiores que zero.")
+
+else:
+    # Calcula a corrente do chuveiro
+    corrente = potencia / tensao
+
+    # Acrescenta 10% de margem
+    corrente_margem = corrente * 1.10
+
+    # Valores comuns de disjuntores (em ampères)
+    disjuntores = [10, 16, 20, 25, 32, 40, 50, 63]
+
+    # Encontra o primeiro valor igual ou superior ao cálculo
+    disjuntor = None
+
+    for valor in disjuntores:
+        if valor >= corrente_margem:
+            disjuntor = valor
+            break
+
+    # Exibe os resultados
+    print("\n========== RESULTADO ==========")
+    print(f"Potência do chuveiro: {potencia:.0f} W")
+    print(f"Tensão da instalação: {tensao:.0f} V")
+    print(f"Corrente calculada: {corrente:.2f} A")
+    print(f"Corrente com 10% de margem: {corrente_margem:.2f} A")
+
+    if disjuntor is not None:
+        print(f"Disjuntor sugerido inicialmente: {disjuntor} A")
+    else:
+        print("Corrente elevada para a lista disponível.")
+        print("Solicite avaliação de um profissional.")
+
+    print("===============================")
+    print("ATENÇÃO: confirme o dimensionamento")
+    print("dos cabos e as condições da instalação.")
